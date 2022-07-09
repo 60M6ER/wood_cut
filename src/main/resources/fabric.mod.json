@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "survival_fabric",
+  "version": "${version}",
+  "name": "SurvivalFabric",
+  "description": "",
+  "authors": [
+    "Bomber"
+  ],
+  "contact": {},
+  "license": "Apache-2.0",
+  "icon": "assets/survivalfabric/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "ru.bomber.survivalfabric.client.SurvivalFabricClient"
+    ],
+    "main": [
+      "ru.bomber.survivalfabric.SurvivalFabric"
+    ]
+  },
+  "mixins": [
+    "survivalfabric.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.8",
+    "fabric": "*",
+    "minecraft": "1.19"
+  }
+}
