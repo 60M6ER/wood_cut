@@ -1,26 +1,28 @@
 {
   "schemaVersion": 1,
-  "id": "survival_fabric",
+  "id": "wood_cut",
   "version": "${version}",
-  "name": "SurvivalFabric",
-  "description": "",
+  "name": "Wood_cut",
+  "description": "mod allows you to chop the tree completely when destroying the bottom block.",
   "authors": [
-    "Bomber"
+    "BOMBER"
   ],
-  "contact": {},
-  "license": "Apache-2.0",
-  "icon": "assets/survivalfabric/icon.png",
+  "contact": {
+    "repo": "https://github.com/60M6ER/wood_cut"
+  },
+  "license": "MIT",
+  "icon": "assets/wood_cut/icon.png",
   "environment": "*",
   "entrypoints": {
     "client": [
-      "ru.bomber.survivalfabric.client.SurvivalFabricClient"
+      "ru.bomber.wood_cut.client.Wood_cutClient"
     ],
     "main": [
-      "ru.bomber.survivalfabric.SurvivalFabric"
+      "ru.bomber.wood_cut.Wood_cut"
     ]
   },
   "mixins": [
-    "survivalfabric.mixins.json"
+    "wood_cut.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.14.8",

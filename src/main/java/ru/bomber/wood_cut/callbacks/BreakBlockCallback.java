@@ -1,40 +1,38 @@
-package ru.bomber.survivalfabric.callBacks;
+package ru.bomber.wood_cut.callbacks;
 
-import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.PillarBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.AxeItem;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-public class AttackTreeListener implements AttackBlockCallback {
+public class BreakBlockCallback implements OnBreakBlockListener {
 
-    Logger LOGGER = LoggerFactory.getLogger(AttackTreeListener.class);
+    Logger LOGGER = LoggerFactory.getLogger(BreakBlockCallback.class);
 
     @Override
-    public ActionResult interact(PlayerEntity player, World world, Hand hand, BlockPos pos, Direction direction) {
-        LOGGER.info("I see attack!");
+    public ActionResult interact(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+        LOGGER.info("I see break block!");
         if (player.getItemsHand().iterator().next().getItem() instanceof AxeItem) {
             LOGGER.info("This is axe!");
             if (world.getBlockState(pos).getBlock() instanceof PillarBlock) {
                 LOGGER.info("This is tree!");
                 Set<BlockPos> posSet = new HashSet<>();
+                posSet.add(pos);
                 getAllNeighbors(world.getBlockState(pos).getBlock(), world, pos, posSet, new HashSet<>());
-                if (posSet.size() > 0) {
-                    world.getBlockState(pos).calcBlockBreakingDelta()
-                }
+                posSet.forEach(p -> {
+                    if (!pos.equals(p)) {
+                        world.breakBlock(p, true);
+                    }
+                });
             }
         }
         return ActionResult.PASS;
